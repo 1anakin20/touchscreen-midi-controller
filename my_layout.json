@@ -1,0 +1,269 @@
+{
+  "device": {
+    "name": "DJ Controller",
+
+    "screen": {
+      "rotation": 1,
+      "width":    320,
+      "height":   240
+    },
+
+    "touch": {
+      "ts_left":      904,
+      "ts_right":     214,
+      "ts_top":       207,
+      "ts_bottom":    832,
+      "min_pressure": 8,
+      "max_pressure": 1000,
+      "pin_xp":       8,
+      "pin_xm":       "A2",
+      "pin_yp":       "A3",
+      "pin_ym":       9,
+      "resistance":   300
+    },
+
+    "midi": {
+      "channel": 1,
+      "baud":    115200
+    }
+  },
+
+  "theme": {
+    "background":           "#111318",
+    "button_bg":            "#1A1F2E",
+    "button_border":        "#3A4055",
+    "button_label":         "#C0C8D8",
+    "button_active_bg":     "#003800",
+    "button_active_border": "#00E000",
+    "button_active_label":  "#00E000",
+    "toggle_on_bg":         "#003800",
+    "toggle_on_border":     "#00E000",
+    "toggle_on_label":      "#00FF00",
+    "toggle_off_bg":        "#1A1F2E",
+    "toggle_off_border":    "#3A4055",
+    "toggle_off_label":     "#C0C8D8",
+    "slider_track":         "#1A2030",
+    "slider_fill":          "#005070",
+    "slider_label":         "#C0C8D8",
+    "slider_value":         "#00C0FF",
+    "nav_bg":               "#0D1018",
+    "nav_border":           "#3A4055",
+    "nav_active":           "#00C0FF",
+    "nav_inactive":         "#3A4055",
+    "status_bg":            "#0A0C10",
+    "status_text":          "#506070"
+  },
+
+  "pages": [
+
+    {
+      "id":    "deck",
+      "label": "Deck",
+      "controls": [
+
+        {
+          "id":           "master",
+          "type":         "button",
+          "label":        "MASTER",
+          "label_size":   3,
+          "x": 10,  "y": 10,  "w": 200,  "h": 120,
+          "corner_radius": 14,
+          "midi": {
+            "type":         "cc",
+            "cc":           20,
+            "value":        127,
+            "send_release": false
+          },
+          "feedback": {
+            "cc":       21,
+            "value_on":  1,
+            "value_off": 0
+          },
+          "colors": {
+            "idle_bg":       "#1A1F2E",
+            "idle_border":   "#3A4055",
+            "idle_label":    "#8090A0",
+            "active_bg":     "#003800",
+            "active_border": "#00E000",
+            "active_label":  "#00FF00"
+          }
+        },
+
+        {
+          "id":           "loop",
+          "type":         "toggle",
+          "label":        "LOOP",
+          "label_size":   2,
+          "x": 220,  "y": 10,  "w": 90,  "h": 55,
+          "corner_radius": 8,
+          "midi": {
+            "type":      "cc",
+            "cc":        22,
+            "value_on":  127,
+            "value_off": 0
+          },
+          "colors": {
+            "on_bg":     "#003800",
+            "on_border": "#00C000",
+            "on_label":  "#00FF00",
+            "off_bg":    "#1A1F2E",
+            "off_border":"#3A4055",
+            "off_label": "#8090A0"
+          }
+        },
+
+        {
+          "id":           "volume",
+          "type":         "slider",
+          "label":        "VOL",
+          "label_size":   1,
+          "x": 220,  "y": 75,  "w": 90,  "h": 55,
+          "orientation":  "horizontal",
+          "corner_radius": 6,
+          "midi": {
+            "type":      "cc",
+            "cc":        7,
+            "value_min": 0,
+            "value_max": 127
+          },
+          "default_value": 100,
+          "feedback": { "cc": 7 },
+          "colors": {
+            "track":      "#1A2030",
+            "fill":       "#005070",
+            "label":      "#8090A0",
+            "value_text": "#00C0FF"
+          }
+        },
+
+        {
+          "id":           "cue",
+          "type":         "button",
+          "label":        "CUE",
+          "label_size":   2,
+          "x": 10,  "y": 140,  "w": 90,  "h": 55,
+          "corner_radius": 8,
+          "midi": {
+            "type":         "cc",
+            "cc":           23,
+            "value":        127,
+            "send_release": true
+          }
+        },
+
+        {
+          "id":           "sync",
+          "type":         "button",
+          "label":        "SYNC",
+          "label_size":   2,
+          "x": 110,  "y": 140,  "w": 90,  "h": 55,
+          "corner_radius": 8,
+          "midi": {
+            "type":         "cc",
+            "cc":           24,
+            "value":        127,
+            "send_release": false
+          },
+          "colors": {
+            "active_bg":     "#2A1500",
+            "active_border": "#FF8000",
+            "active_label":  "#FF8000"
+          }
+        },
+
+        {
+          "id":           "play",
+          "type":         "button",
+          "label":        "PLAY",
+          "label_size":   2,
+          "x": 210,  "y": 140,  "w": 100,  "h": 55,
+          "corner_radius": 8,
+          "midi": {
+            "type":         "cc",
+            "cc":           25,
+            "value":        127,
+            "send_release": false
+          },
+          "colors": {
+            "idle_bg":       "#001A00",
+            "idle_border":   "#004000",
+            "idle_label":    "#00A000",
+            "active_bg":     "#004000",
+            "active_border": "#00FF00",
+            "active_label":  "#00FF00"
+          }
+        }
+
+      ]
+    },
+
+    {
+      "id":    "fx",
+      "label": "FX",
+      "controls": [
+
+        {
+          "id": "fx1",  "type": "toggle",  "label": "FX 1",  "label_size": 2,
+          "x": 10,  "y": 10,  "w": 90,  "h": 90,  "corner_radius": 10,
+          "midi": { "type": "cc", "cc": 30, "value_on": 127, "value_off": 0 }
+        },
+        {
+          "id": "fx2",  "type": "toggle",  "label": "FX 2",  "label_size": 2,
+          "x": 115,  "y": 10,  "w": 90,  "h": 90,  "corner_radius": 10,
+          "midi": { "type": "cc", "cc": 31, "value_on": 127, "value_off": 0 }
+        },
+        {
+          "id": "fx3",  "type": "toggle",  "label": "FX 3",  "label_size": 2,
+          "x": 220,  "y": 10,  "w": 90,  "h": 90,  "corner_radius": 10,
+          "midi": { "type": "cc", "cc": 32, "value_on": 127, "value_off": 0 }
+        },
+        {
+          "id": "fx_depth",  "type": "slider",  "label": "DEPTH",  "label_size": 1,
+          "x": 10,  "y": 120,  "w": 300,  "h": 50,
+          "orientation": "horizontal",  "corner_radius": 6,
+          "midi": { "type": "cc", "cc": 33, "value_min": 0, "value_max": 127 },
+          "default_value": 64
+        }
+
+      ]
+    },
+
+    {
+      "id":    "mixer",
+      "label": "Mix",
+      "controls": [
+
+        {
+          "id": "gain",  "type": "slider",  "label": "GAIN",  "label_size": 1,
+          "x": 10,   "y": 10,  "w": 60,  "h": 175,  "orientation": "vertical",
+          "corner_radius": 6,
+          "midi": { "type": "cc", "cc": 40, "value_min": 0, "value_max": 127 },
+          "default_value": 100
+        },
+        {
+          "id": "bass",  "type": "slider",  "label": "BASS",  "label_size": 1,
+          "x": 90,   "y": 10,  "w": 60,  "h": 175,  "orientation": "vertical",
+          "corner_radius": 6,
+          "midi": { "type": "cc", "cc": 41, "value_min": 0, "value_max": 127 },
+          "default_value": 64
+        },
+        {
+          "id": "mid",  "type": "slider",  "label": "MID",  "label_size": 1,
+          "x": 170,  "y": 10,  "w": 60,  "h": 175,  "orientation": "vertical",
+          "corner_radius": 6,
+          "midi": { "type": "cc", "cc": 42, "value_min": 0, "value_max": 127 },
+          "default_value": 64
+        },
+        {
+          "id": "treble",  "type": "slider",  "label": "TREB",  "label_size": 1,
+          "x": 250,  "y": 10,  "w": 60,  "h": 175,  "orientation": "vertical",
+          "corner_radius": 6,
+          "midi": { "type": "cc", "cc": 43, "value_min": 0, "value_max": 127 },
+          "default_value": 64
+        }
+
+      ]
+    }
+
+  ]
+}
