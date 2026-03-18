@@ -1,22 +1,36 @@
-# Arduino MIDI Controller Toolkit
+# Touchscreen DJ controller
+AI was used in making this project.
 
-Generate and flash custom MIDI controller firmware from a JSON layout file.
-No Arduino IDE needed after initial setup.
+Note this is a work in progress. It might not fully work at the moment. Any existing features might change without any previous notice. Want something in particular or a bug? Feel free to open a pull request.
+
+![Main page demo](main_page.jpg)
+![Effects page demo](effects_page.jpg)
+
+The colors are customizable!
+
+## What it is?
+It is a touchscreen midi controller for DJing using an Arduino and a touchscreen. You can make custom layouts with buttons, sliders, and supports pagination. You can specify the midi code of them. The layout file can be easily shared. This was primarly made for DJing, but nothing stops you from using it for any program accepting midi. Also it is open source! You can adapt it to any of your needs.
+
+## How it works
+You write a json config on how you want your layout and specify the midi codes they send. The Generate.py program will take care of generating an arduino sketch, then flash.py can take care of flashing it directly to your Arduino. Arduino uno does not supports midi, so you must use [The Hairless MIDI bridge](https://projectgus.github.io/hairless-midiserial/) to receive the MIDI messages. On Mac you can use the MIDI setup utility to create loopback midi ports, for windows you may use [loopMIDI](https://www.tobias-erichsen.de/software/loopmidi.html) or any other program.
 
 ```
 my_layout.json  →  generate.py  →  firmware.ino  →  flash.py  →  Arduino
 ```
 
----
+## Supported devices
+- Arduino uno
+- Tested with a Keyes 2.8"TFT LCD Shield
+   - Note at the moment it uses the MCUFRIEND_kbv library. Support for other screens is unknown. Check if your display is supported by that library, and if you need to do any changes (pull request? 👀).
 
 ## Files
 
 | File                | Purpose                                              |
 |---------------------|------------------------------------------------------|
-| `my_layout.json`    | Your controller layout (edit this)                  |
-| `generate.py`       | Converts JSON → Arduino .ino sketch                 |
+| `my_layout.json`    | Your controller layout (edit this)                   |
+| `generate.py`       | Converts JSON → Arduino .ino sketch                  |
 | `flash.py`          | Generates + compiles + uploads in one command        |
-| `CONFIG_FORMAT.md`  | Full documentation of every config option           |
+| `CONFIG_FORMAT.md`  | Full documentation of every config option            |
 
 ---
 
@@ -35,6 +49,7 @@ arduino-cli lib install "MCUFRIEND_kbv" "Adafruit GFX Library" "TouchScreen"
 ```
 
 ### 2. Edit your layout
+See [CONFIG_FORMAT.md](CONFIG_FORMAT.md) for the documentation of the layout JSON format.
 
 Open `my_layout.json` and edit it. See `CONFIG_FORMAT.md` for every option.
 
@@ -110,19 +125,8 @@ The Arduino Uno has no USB-MIDI. Use Hairless MIDI to bridge:
 
 > ⚠️ Close Hairless MIDI before flashing. They share the serial port.
 
----
+## Future ideas
 
-## Sharing layouts
-
-A layout is just a `.json` file — share it like any other file.
-Recipients need the same calibration values for their specific shield,
-but everything else (controls, MIDI CCs, colors, pages) is portable.
-
----
-
-## Planned features
-
-- Visual GUI editor that reads/writes the same JSON format
-- Multiple MIDI channels per layout
-- Page-transition animations
-- Swipe gesture navigation between pages
+- Visual GUI editor to edit the JSON configuration
+- Proper midi in support to sync the state of the screen to the DJ program
+- Arduino Leonardo support as it natively supports MIDI trough USB
